@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.group_finity.mascot.Main
+Class-Path: jna.jar examples.jar nimrodlf.jar AbsoluteLayout.jar
+

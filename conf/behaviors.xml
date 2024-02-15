@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Mascot xmlns:Mascot="http://www.group-finity.com/Mascot" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.group-finity.com/Mascot Mascot.xsd">
+
+	<BehaviorList>
+		
+		<!-- 摔落 -->
+		<Behavior Name="Fall" Frequency="0" Hidden="true" />
+
+		<!-- 站立 -->
+		<Behavior Name="Stand" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 坐着 -->
+		<Behavior Name="Sit" Frequency="100" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" />
+
+		<!-- 踮脚 -->
+		<Behavior Name="Tip" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 踮脚之后坐下 -->
+		<Behavior Name="TipAndSit" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 扭屁股 -->
+		<Behavior Name="TwistWaist" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 走路 -->
+		<Behavior Name="Walk" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 跳 -->
+		<Behavior Name="Jump" Condition="#{mascot.environment.floor.isOn(mascot.anchor) &amp;&amp;
+			mascot.anchor.x &lt; mascot.environment.workArea.left+mascot.environment.workArea.width / 4}" Frequency="100" Hidden="true" />
+
+		<!-- 跑步 -->
+		<Behavior Name="Run" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 爬行 -->
+		<Behavior Name="Creep" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 躺平 -->
+		<Behavior Name="Lie" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 走路后坐下 -->
+		<Behavior Name="WalkAndSit" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 爬墙 -->
+		<Behavior Name="ClimbWall" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 跑步后坐下 -->
+		<Behavior Name="RunAndSit" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 跑步后爬墙 -->
+		<Behavior Name="RunAndClimbWall" Condition="#{mascot.environment.floor.isOn(mascot.anchor)}" Frequency="100" Hidden="true" />
+
+		<!-- 抓住墙壁 -->
+		<Behavior Name="WallGrab" Frequency="100" Hidden="true" Condition="#{ mascot.lookRight ?
+					mascot.environment.workArea.rightBorder.isOn(mascot.anchor) :
+					mascot.environment.workArea.leftBorder.isOn(mascot.anchor) }"/>
+
+		<!-- 从墙壁上掉下来 -->
+		<Behavior Name="FallFromWall" Frequency="50" Hidden="true" Condition="#{ (mascot.lookRight ?
+					mascot.environment.workArea.rightBorder.isOn(mascot.anchor) :
+					mascot.environment.workArea.leftBorder.isOn(mascot.anchor) ) &amp;&amp;
+					!mascot.environment.floor.isOn(mascot.anchor)}"/>
+
+		<!-- 趴在地上的后续动作 -->
+		<Condition Condition="#{mascot.lookRight ? mascot.environment.workArea.rightBorder.isOn(mascot.anchor) :
+					mascot.environment.workArea.leftBorder.isOn(mascot.anchor)}">
+			<!-- 趴在地面上爬 -->
+			<Behavior Name="ClimbHalfwayAlongWall" Frequency="100" Hidden="true" />
+			<!-- 爬上天花板 -->
+			<Behavior Name="ClimbFromWallToCeil" Frequency="100" />
+		</Condition>
+
+		<!-- 在天花板上的动作 -->
+		<Condition Condition="#{mascot.environment.ceiling.isOn(mascot.anchor)}">
+			<!-- 抓住天花板 -->
+			<Behavior Name="HoldOntoCeiling" Frequency="100" Hidden="true" />
+			<!-- 从天花板上掉下来 -->
+			<Behavior Name="FallFromCeiling" Frequency="50" Hidden="true" />
+		</Condition>
+
+
+		<!-- 在天花板上爬 -->
+		<Behavior Name="ClimbCeil" Frequency="100" Condition="#{mascot.environment.ceiling.isOn(mascot.anchor)}" />
+
+		<!-- 鼠标拉取 -->
+		<Behavior Name="Dragged" Frequency="0" Hidden="true" />
+
+		<!-- 扔出去 -->
+		<Behavior Name="Thrown" Frequency="0" Hidden="true" />
+
+		<!-- 拉起来摔地上 -->
+		<Behavior Name="PullUp" Frequency="0" Hidden="true" />
+
+		<!-- 追鼠标-->
+		<Behavior Name="ChaseMouse" Frequency="0" Hidden="true">
+			<NextBehavior Add="false">
+				<BehaviorReference Name="Sit" Frequency="1" />
+			</NextBehavior>
+		</Behavior>
+
+	</BehaviorList>
+</Mascot>
